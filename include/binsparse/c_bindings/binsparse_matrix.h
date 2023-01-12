@@ -369,7 +369,7 @@ bc_type_code ;
 //      (..., Index, Hyper, ...) is not valid.
 //
 // (6) (..., Hyper, Sparse, ...) can be defined but is not useful.
-//      The same can be done with (..., Index, Full, ...) by just deleting
+//      The same can be done with (..., Index, Sparse, ...) by just deleting
 //      the pointer for the Hyper axis.  The pointer vector contains a
 //      list of constant stride (see below).
 
@@ -520,18 +520,18 @@ language must be Index or Full.
                                         |   fixed size
 
     "Sparse"                                "Index"
-    (pointer present  <------------------>  no pointer
-    no index.                               index present
-    size is                                 size is
-    dim [k]                          /--->  nindex[k]
+    (pointer present  <------------------>  no pointer   ---\
+    no index. --\                           index present   |
+    size is     |                           size is      <--/
+    dim [k]  <--/                    /--->  nindex[k]
            \                        /                 \
             \                      /                   \
              \                    /                     \
               \                  /                       \
                \        "Hyper" /                         --->  "Full"
-                \-----> (both pointer                           no pointer
-                        and index.                              no index
-                        size is                                 size is
+                \-----> (both pointer --\                       no pointer --\
+                        and index.      |                       no index     |
+                        size is      <--/                       size is  <---/
                         nindex [k]                              dim [k]
 
                     |                                       |
